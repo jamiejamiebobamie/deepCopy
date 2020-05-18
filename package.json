@@ -1,0 +1,24 @@
+{
+  "name": "tictactoe_frontend",
+  "version": "1.0.0",
+  "description": "frontend experience for my tic tac toe ai",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamiejamiebobamie/-tictactoe_frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jamiejamiebobamie/-tictactoe_frontend/issues"
+  },
+  "homepage": "https://github.com/jamiejamiebobamie/-tictactoe_frontend#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.3",
+    "path": "^0.12.7"
+  }
+}

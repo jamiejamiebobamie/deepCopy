@@ -1,0 +1,23 @@
+
+body, html{height: 100%; position: relative;}
+
+div.wrap{height: 100%; overflow: hidden;}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    color: black;
+    background-color: black;
+}
+
+.sketch-holder{
+    display: flex;
+    align-self: center;
+    margin-bottom: auto;
+    height: 100%;
+    margin-top: -8px;
+}
