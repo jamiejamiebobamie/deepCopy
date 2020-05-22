@@ -18,7 +18,7 @@ class MenuView extends View{
     constructor(parameterObject){
         super(parameterObject);
         this.titleSprites = null;
-        this.spriteAreaStartX = 0;
+        this.spriteArea = null;
     }
     redrawElements(gameState){
         let portrait = windowWidth < windowHeight;
@@ -55,9 +55,9 @@ class MenuView extends View{
         height = portrait ? windowHeight*(2/3) : windowHeight
         offsetX = portrait ? 0 : windowWidth*(1/3)
         offsetY = portrait ? windowHeight*(1/3) : 0
-        this.spriteAreaStartX = width;
         params = {width:width, height:height, offsetX:offsetX, offsetY:offsetY}//, color:"red",}
         let spriteArea = new Container(params)
+        this.spriteArea = spriteArea;
         this.uiElements.push(spriteArea)
         if (gameState){
             // console.log(gameState.titleIdle, "hey")
@@ -104,14 +104,25 @@ class MenuView extends View{
         for (var i = 0; i < 5; i++){
             let index = i%5+1;
             // console.log(i,index)
-            range = {
-                1: [random(this.x+(this.x+this.width)*(3/15), this.x+(this.x+this.width)*(7/15)), random( this.y + (this.y + this.height)*(1.5/7) , + (this.y + this.height)*(2/7) )],
-                2: [random(this.x+(this.x+this.width)*(7/15), this.x+(this.x+this.width)*(9/15) ), random(this.y + (this.y + this.height)*(2/7) ,this.y  + (this.y + this.height)*(2.5/7) )],
-                3: [random(this.x+(this.x+this.width)*(9/15), this.x+(this.x+this.width)*(11/15)), random(this.y + (this.y + this.height)*(2.5/7) ,this.y  + (this.y + this.height)*(3.5/7) )],
-                4: [random(this.x+(this.x+this.width)*(11/15), this.x+(this.x+this.width)*(13/15)), random(this.y + (this.y + this.height)*(3.5/7) ,this.y + (this.y + this.height)*(4/7) )],
-                5: [random( this.x+(this.x+this.width)*(13/15), this.x+(this.x+this.width)*(15/15) ), random(this.y + (this.y + this.height)*(4.5/7) ,this.y  + (this.y + this.height) *(5/7)  )]
-                }
-            let x = range[grid[i][0]][0]+this.width/2.5;
+            if (this.row){
+                range = {
+                    1: [random(this.spriteArea.x +(this.spriteArea.x+this.spriteArea.width)*(6/15), this.spriteArea.x+(this.spriteArea.x+this.spriteArea.width)*(10/15)), random( this.spriteArea.y + (this.spriteArea.y + this.spriteArea.height)*(.5/7) ,this.spriteArea.y  + (this.spriteArea.y + this.spriteArea.height)*(1/7) )],
+                    2: [random(this.spriteArea.x +(this.spriteArea.x+this.spriteArea.width)*(10/15), this.spriteArea.x+(this.spriteArea.x+this.spriteArea.width)*(12/15) ), random(this.spriteArea.y + (this.spriteArea.y + this.spriteArea.height)*(1/7) , this.spriteArea.y  + (this.spriteArea.y + this.spriteArea.height)*(1.5/7) )],
+                    3: [random(this.spriteArea.x +(this.spriteArea.x+this.spriteArea.width)*(12/15), this.spriteArea.x+(this.spriteArea.x+this.spriteArea.width)*(14/15)), random(this.spriteArea.y + (this.spriteArea.y + this.spriteArea.height)*(1.5/7) ,this.spriteArea.y  + (this.spriteArea.y + this.spriteArea.height)*(2/7) )],
+                    4: [random(this.spriteArea.x +(this.spriteArea.x+this.spriteArea.width)*(13/15), this.spriteArea.x+(this.spriteArea.x+this.spriteArea.width)*(13/15)), random(this.spriteArea.y + (this.spriteArea.y + this.spriteArea.height)*(2/7) ,this.spriteArea.y + (this.spriteArea.y + this.spriteArea.height)*(3/7) )],
+                    5: [random(this.spriteArea.x +(this.spriteArea.x+this.spriteArea.width)*(14/15), this.spriteArea.x+(this.spriteArea.x+this.spriteArea.width)*(15/15) ), random(this.spriteArea.y + (this.spriteArea.y + this.spriteArea.height)*(3.5/7) ,this.spriteArea.y  + (this.spriteArea.y + this.spriteArea.height) *(4/7)  )]
+                    }
+            } else {
+                range = {
+                    1: [random(this.spriteArea.x +(this.spriteArea.x+this.spriteArea.width)*(6/15), this.spriteArea.x+(this.spriteArea.x+this.spriteArea.width)*(10/15)), random( this.spriteArea.y + (this.spriteArea.y + this.spriteArea.height)*(3/7) ,this.spriteArea.y  + (this.spriteArea.y + this.spriteArea.height)*(4/7) )],
+                    2: [random(this.spriteArea.x +(this.spriteArea.x+this.spriteArea.width)*(10/15), this.spriteArea.x+(this.spriteArea.x+this.spriteArea.width)*(12/15) ), random(this.spriteArea.y + (this.spriteArea.y + this.spriteArea.height)*(4/7) , this.spriteArea.y  + (this.spriteArea.y + this.spriteArea.height)*(4.5/7) )],
+                    3: [random(this.spriteArea.x +(this.spriteArea.x+this.spriteArea.width)*(12/15), this.spriteArea.x+(this.spriteArea.x+this.spriteArea.width)*(14/15)), random(this.spriteArea.y + (this.spriteArea.y + this.spriteArea.height)*(4.5/7) ,this.spriteArea.y  + (this.spriteArea.y + this.spriteArea.height)*(5/7) )],
+                    4: [random(this.spriteArea.x +(this.spriteArea.x+this.spriteArea.width)*(13/15), this.spriteArea.x+(this.spriteArea.x+this.spriteArea.width)*(13/15)), random(this.spriteArea.y + (this.spriteArea.y + this.spriteArea.height)*(5/7) ,this.spriteArea.y + (this.spriteArea.y + this.spriteArea.height)*(5.5/7) )],
+                    5: [random(this.spriteArea.x +(this.spriteArea.x+this.spriteArea.width)*(14/15), this.spriteArea.x+(this.spriteArea.x+this.spriteArea.width)*(15/15) ), random(this.spriteArea.y + (this.spriteArea.y + this.spriteArea.height)*(6/7) ,this.spriteArea.y  + (this.spriteArea.y + this.spriteArea.height) *(7/7)  )]
+                    }
+            }
+
+            let x = range[grid[i][0]][0]//+this.width/2;
             let y = range[grid[i][1]][1]
             titleSprites[i] = new TitleSprite(gameState.titleIdle, gameState.titleWave, gameState.titleChosen, gameState.titlePoint1, gameState.titlePoint2, gameState.titlePoint3, gameState.titlePoint4, x, y, random(.5, .7))
         }
@@ -146,8 +157,9 @@ class PlayView extends View{
         let width  = portrait ? windowWidth*navBarRatio : windowWidth
         let height = portrait ? windowHeight : windowHeight*navBarRatio/1.7
         let offsetX = portrait ? windowWidth*(1- navBarRatio) : 0
-        let params = {width: width, height: height, offsetX: offsetX}//, color:"red",}
+        let params = {width: width, height: height, offsetX: offsetX}//, color:color(71,253,53),}
         let navBar = new Container(params)
+        // navBar.setFill(true);//color(71,253,53));
         this.uiElements.push(navBar)
 
         width  = navBar.width*(9/10)
