@@ -91,6 +91,12 @@ class MenuView extends View{
 
     refreshTitle(gameState){
         let range = {
+            // this.x = minX
+            // this.x+this.width = maxX
+            // this.y = minY
+            // this.y + this.height = maxY
+            // RATIOS within above bounds ^^
+            // [x,y]
             1: [random(0, 700), random(300,380)],
             2: [random(700, 900), random(380, 460)],
             3: [random(900, 1100), random(460, 540)],
