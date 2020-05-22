@@ -11,7 +11,7 @@ class Sprite{
 class TitleSprite {
     constructor(idle, wave, chosen, point1, point2, point3, point4, x, y, speed){
         this.speed = speed || 1;
-        console.log(this.speed)
+        // console.log(this.speed)
         this.animation_idle = idle;
         this.animation_wave = wave;
         this.animation_chosen = chosen;

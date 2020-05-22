@@ -183,8 +183,11 @@ function clickRecursive(uiElement){
 // p5.js built-in method. called when mouse click is release.
 function mouseReleased() {
     returnValueFromViews = clickReleasedRecursive(views[viewIndex]) || returnValueFromViews
-    if (returnValueFromViews){setTopLevelVariables(returnValueFromViews);}
-    redrawn(gameState);
+    if (returnValueFromViews){
+        setTopLevelVariables(returnValueFromViews);
+        redrawn(gameState);
+    }
+
     // 'doneOnce' is reset with mouseReleased() function.
     doneOnce = false;
 }
@@ -212,7 +215,7 @@ function setTopLevelVariables(returnValueFromViews){
         // some buttons return multiple commands that are iterated through
             // from back to front.
         command = returnValueFromViews.pop()
-        console.log(command)
+        // console.log(command)
         switch (command) {
             case "togglePlayView":
                 viewIndex = 1

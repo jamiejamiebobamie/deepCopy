@@ -60,7 +60,7 @@ class MenuView extends View{
         let spriteArea = new Container(params)
         this.uiElements.push(spriteArea)
         if (gameState){
-            console.log(gameState.titleIdle, "hey")
+            // console.log(gameState.titleIdle, "hey")
             this.titleSprites = this.refreshTitle(gameState);
         }
 
@@ -86,34 +86,33 @@ class MenuView extends View{
             grid.push([columns[count], count]);
             count = count + 1
             }
+            // console.log(grid)
             return grid
         }
 
     refreshTitle(gameState){
-        let range = {
-            // this.x = minX
-            // this.x+this.width = maxX
-            // this.y = minY
-            // this.y + this.height = maxY
-            // RATIOS within above bounds ^^
-            // [x,y]
-            1: [random(0, 700), random(300,380)],
-            2: [random(700, 900), random(380, 460)],
-            3: [random(900, 1100), random(460, 540)],
-            4: [random(1100, 1300), random(540,620)],
-            5: [random(1300, 1500), random(620, 700)]
-            // 1: [random(this.spriteAreaStartX + this.spriteAreaStartX/3, this.spriteAreaStartX + this.spriteAreaStartX*700/1500), random(this.height + this.height*300/700, this.height + this.height*380/700)],
-            // 2: [random(this.spriteAreaStartX + this.spriteAreaStartX*700/1500, this.spriteAreaStartX + this.spriteAreaStartX*900/1500), random(this.height + this.height*380/700, this.height + this.height*460/700)],
-            // 3: [random(this.spriteAreaStartX + this.spriteAreaStartX*900/1500, this.spriteAreaStartX + this.spriteAreaStartX*1100/1500), random(this.height + this.height*460/700, this.height + this.height*540/700)],
-            // 4: [random(this.spriteAreaStartX + this.spriteAreaStartX*1100/1500, this.spriteAreaStartX + this.spriteAreaStartX*1300/1500), random(this.height + this.height*540/700, + this.height*620/700)],
-            // 5: [random(this.spriteAreaStartX + this.spriteAreaStartX*1300/1500, this.spriteAreaStartX + this.spriteAreaStartX*1500/1500), random(this.height + this.height*620/700, this.height + this.height*700/700)]
-        }
+        let range;
+        // let range = {
+        //     1: [random(this.x+(this.x+this.width)*(3/15), this.x+(this.x+this.width)*(7/15)), random( this.y + (this.y + this.height)*(1.5/7) , + (this.y + this.height)*(2/7) )],
+        //     2: [random(this.x+(this.x+this.width)*(7/15), this.x+(this.x+this.width)*(9/15) ), random(this.y + (this.y + this.height)*(2/7) ,this.y  + (this.y + this.height)*(2.5/7) )],
+        //     3: [random(this.x+(this.x+this.width)*(9/15), this.x+(this.x+this.width)*(11/15)), random(this.y + (this.y + this.height)*(2.5/7) ,this.y  + (this.y + this.height)*(3.5/7) )],
+        //     4: [random(this.x+(this.x+this.width)*(11/15), this.x+(this.x+this.width)*(13/15)), random(this.y + (this.y + this.height)*(3.5/7) ,this.y + (this.y + this.height)*(4/7) )],
+        //     5: [random( this.x+(this.x+this.width)*(13/15), this.x+(this.x+this.width)*(15/15) ), random(this.y + (this.y + this.height)*(4.5/7) ,this.y  + (this.y + this.height) *(5/7)  )]
+        // }
         let grid = this.makeVertices(5)
         let titleSprites = []
-        // console.log(gameState.titleIdle, gameState.titleWave, gameState.titleChosen, gameState.titlePoint1, gameState.titlePoint2, gameState.titlePoint3, gameState.titlePoint4)
         for (var i = 0; i < 5; i++){
-            let x = range[grid[i][0]][0]*2;
-            let y = range[grid[i][1]][1]-100;
+            let index = i%5+1;
+            // console.log(i,index)
+            range = {
+                1: [random(this.x+(this.x+this.width)*(3/15), this.x+(this.x+this.width)*(7/15)), random( this.y + (this.y + this.height)*(1.5/7) , + (this.y + this.height)*(2/7) )],
+                2: [random(this.x+(this.x+this.width)*(7/15), this.x+(this.x+this.width)*(9/15) ), random(this.y + (this.y + this.height)*(2/7) ,this.y  + (this.y + this.height)*(2.5/7) )],
+                3: [random(this.x+(this.x+this.width)*(9/15), this.x+(this.x+this.width)*(11/15)), random(this.y + (this.y + this.height)*(2.5/7) ,this.y  + (this.y + this.height)*(3.5/7) )],
+                4: [random(this.x+(this.x+this.width)*(11/15), this.x+(this.x+this.width)*(13/15)), random(this.y + (this.y + this.height)*(3.5/7) ,this.y + (this.y + this.height)*(4/7) )],
+                5: [random( this.x+(this.x+this.width)*(13/15), this.x+(this.x+this.width)*(15/15) ), random(this.y + (this.y + this.height)*(4.5/7) ,this.y  + (this.y + this.height) *(5/7)  )]
+                }
+            let x = range[grid[i][0]][0]+this.width/2.5;
+            let y = range[grid[i][1]][1]
             titleSprites[i] = new TitleSprite(gameState.titleIdle, gameState.titleWave, gameState.titleChosen, gameState.titlePoint1, gameState.titlePoint2, gameState.titlePoint3, gameState.titlePoint4, x, y, random(.5, .7))
         }
         return titleSprites;
