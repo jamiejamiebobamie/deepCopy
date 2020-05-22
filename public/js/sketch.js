@@ -47,10 +47,10 @@ function preload(){
     titleIdle = loadImage('../sprites/SpriteSheet_title-idle-58-471x500.png')
     titleWave = loadImage('../sprites/SpriteSheet_title-wave-18-471x500.png')
     titleChosen = loadImage('../sprites/SpriteSheet_title-chosen-87-471x500.png')
-    titlePoint1 = loadImage('../sprites/SpriteSheet_title-point1-51-471x500.png')
-    titlePoint2 = loadImage('../sprites/SpriteSheet_title-point2-49-471x500.png')
-    titlePoint3 = loadImage('../sprites/SpriteSheet_title-point3-38-471x500.png')
-    titlePoint4 = loadImage('../sprites/SpriteSheet_title-point4-41-471x500.png')
+    // titlePoint1 = loadImage('../sprites/SpriteSheet_title-point1-51-471x500.png')
+    // titlePoint2 = loadImage('../sprites/SpriteSheet_title-point2-49-471x500.png')
+    // titlePoint3 = loadImage('../sprites/SpriteSheet_title-point3-38-471x500.png')
+    // titlePoint4 = loadImage('../sprites/SpriteSheet_title-point4-41-471x500.png')
 }
 // p5.js built-in method
 function setup() {
