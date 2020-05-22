@@ -144,7 +144,7 @@ class PlayView extends View{
     constructor(parameterObject){
         super(parameterObject)
     }
-    redrawElements(state){
+    redrawElements(gameState){
         let portrait = windowWidth < windowHeight;
 
         this.uiElements = []
@@ -152,7 +152,7 @@ class PlayView extends View{
         // navBar
         let navBarAmout = 1.0
         let playViewAmount = 5.0
-        let navBarRatio = navBarAmout/playViewAmount
+        let navBarRatio = navBarAmout/playViewAmount;
         // console.log(navBarAmout)
         let width  = portrait ? windowWidth*navBarRatio : windowWidth
         let height = portrait ? windowHeight : windowHeight*navBarRatio/1.7
@@ -205,6 +205,48 @@ class PlayView extends View{
         helpButton.setFontStyle("monospace")
         helpButton.setTextColor(color(71,253,53))
         this.uiElements.push(helpButton)
+
+        // FIX below...
+        let playViewRatio = (playViewAmount-navBarAmout)/playViewAmount;
+        width  = portrait ? windowWidth*playViewRatio : windowWidth
+        height = portrait ? windowHeight : windowHeight*playViewRatio/1.7
+        // offsetX = portrait ? windowWidth*(-1* navBar.width) : 0
+        offsetY = portrait ? 0 : navBar.height
+        params = {width: width, height: height, offsetY: offsetY}//,color: "red"}//, color:color(71,253,53),}
+        let healthBarContainer = new Container(params);
+        this.uiElements.push(healthBarContainer)
+
+        params = {parent:healthBarContainer}
+        let healthBarFirstThird = new ImageContainer(params);
+        this.uiElements.push(healthBarFirstThird)
+
+        // params = {len:3, index:1, parent:healthBarContainer}
+        let healthBarSecondThird = new ImageContainer(params);
+        this.uiElements.push(healthBarSecondThird)
+        //
+        // params = {len:3, index:2, parent:healthBarContainer}
+        let healthBarThirdThird = new ImageContainer(params);
+        this.uiElements.push(healthBarThirdThird)
+        if (gameState){
+            let imageWidth;
+            let imageHeight;
+            // value range across all screen types.
+                // 320-2560 width
+                // 568-1078 height
+            if (portrait){
+                // smaller edge of aspect ratio: width
+                imageWidth = 300*(this.width/800);
+                imageHeight = 284*(this.width/800);
+            } else {
+                // smaller edge of aspect ratio: height
+                imageWidth = 300/2*(this.height/500);
+                imageHeight = 284/2*(this.height/500);
+            }
+
+            healthBarFirstThird.setImageProps(gameState.brainTop,imageWidth,imageHeight)
+            healthBarSecondThird.setImageProps(gameState.brainMiddle,imageWidth,imageHeight)
+            healthBarThirdThird.setImageProps(gameState.brainBottom,imageWidth,imageHeight)
+        }
     }
     jumpToMenuView(){return ["toggleMenuView"]}
 }

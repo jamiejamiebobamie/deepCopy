@@ -24,6 +24,9 @@ let gameState = {idle:[],
                 titlePoint2:[],
                 titlePoint3:[],
                 titlePoint4:[],
+                brainTop:null,
+                brainMiddle:null,
+                brainBottom:null,
                 }
 
 let anim_idle = [];
@@ -47,6 +50,11 @@ function preload(){
     titleIdle = loadImage('../sprites_minimized/SpriteSheet_title-idle-58-159.7x167.png')
     titleWave = loadImage('../sprites_minimized/SpriteSheet_title-wave-18-156.833333333x166.png')
     titleChosen = loadImage('../sprites_minimized/SpriteSheet_title-chosen-87-157x167.png')
+
+    gameState.brainTop = loadImage('../imgs/healthBar/brainTop.png');
+    gameState.brainMiddle = loadImage('../imgs/healthBar/brainMiddle.png');
+    gameState.brainBottom = loadImage('../imgs/healthBar/brainBottom.png');
+
     // titlePoint1 = loadImage('../sprites/SpriteSheet_title-point1-51-471x500.png')
     // titlePoint2 = loadImage('../sprites/SpriteSheet_title-point2-49-471x500.png')
     // titlePoint3 = loadImage('../sprites/SpriteSheet_title-point3-38-471x500.png')
@@ -117,6 +125,8 @@ function setup() {
 }
 // redraws the views based on the current dimensions
     // of the screen (width and height) and the current gameState.
+// this is super not-performant. i'm recreating ALL the views instead of just
+    // the current...
 function redrawn(gameState){
     views = [];
     let menuScreen = new MenuView()
@@ -124,6 +134,7 @@ function redrawn(gameState){
     views.push(menuScreen)
 
     let playScreen = new PlayView()
+    playScreen.redrawElements(gameState);
     views.push(playScreen)
 }
 // p5.js built-in method
