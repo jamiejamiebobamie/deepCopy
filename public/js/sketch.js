@@ -13,12 +13,44 @@ let apiReturnValue = null;
 // the gameState is used to keep track of the state of the game.
     // uiElements lose their state each time they are redrawn
     // so require the state to be passed in on re-initializtion.
-let gameState = {}
+let gameState = {idle:[],
+                wave:[],
+                chosen:[],
+                font:[],
+                titleIdle:[],
+                titleWave:[],
+                titleChosen:[],
+                titlePoint1:[],
+                titlePoint2:[],
+                titlePoint3:[],
+                titlePoint4:[],
+                }
+
+let anim_idle = [];
+let anim_wave = [];
+let anim_chosen = [];
+
+let titleIdle = [];
+let titleWave = [];
+let titleChosen = [];
+let titlePoint1 = [];
+let titlePoint2 = [];
+let titlePoint3 = [];
+let titlePoint4 = [];
+
 // p5.js built-in method
 function preload(){
-    // gameState.loadedImage = loadImage('../imgs/brain_base.png');
-    // gameState.fontStyle = loadFont('fonts/Quicksand-Bold.otf');
-    // textFont(gameState.fontStyle)
+    idle = loadImage('../sprites/idle150.png')
+    wave = loadImage('../sprites/wave150.png')
+    chosen = loadImage('../sprites/chosen150.png')
+    font = loadFont('../fonts/VeraMono.ttf');
+    titleIdle = loadImage('../sprites/SpriteSheet_title-idle-58-471x500.png')
+    titleWave = loadImage('../sprites/SpriteSheet_title-wave-18-471x500.png')
+    titleChosen = loadImage('../sprites/SpriteSheet_title-chosen-87-471x500.png')
+    titlePoint1 = loadImage('../sprites/SpriteSheet_title-point1-51-471x500.png')
+    titlePoint2 = loadImage('../sprites/SpriteSheet_title-point2-49-471x500.png')
+    titlePoint3 = loadImage('../sprites/SpriteSheet_title-point3-38-471x500.png')
+    titlePoint4 = loadImage('../sprites/SpriteSheet_title-point4-41-471x500.png')
 }
 // p5.js built-in method
 function setup() {
@@ -31,6 +63,56 @@ function setup() {
     // menuButton = new MenuButton({width:50, height:50, mouseClickfunc: cycleViews})
     // p5.js built-in method. centers the canvas and all drawn objects.
     imageMode(CENTER);
+
+    // for (var i = 0; i < 185; i++) {
+    //     let img = idle.get((i*150),0, 150, 119);
+    //     gameState.idle.push(img);
+    // }
+    //
+    // for (var i = 0; i < 20; i++) {
+    //     let img = wave.get((i*150),0, 150, 119);
+    //     gameState.wave.push(img);
+    // }
+    //
+    // for (var i = 0; i < 67; i++) {
+    //     let img = chosen.get((i*150),0, 150, 119);
+    //     gameState.chosen.push(img);
+    // }
+
+    for (var i = 0; i < 58; i++) {
+        let img = titleIdle.get((i*471),0, 471, 500);
+        gameState.titleIdle.push(img);
+    }
+
+    for (var i = 0; i < 18; i++) {
+        let img = titleWave.get((i*471),0, 471, 500);
+        gameState.titleWave.push(img);
+    }
+
+    for (var i = 0; i < 87; i++) {
+        let img = titleChosen.get((i*471),0, 471, 500);
+        gameState.titleChosen.push(img);
+    }
+    //
+    // for (var i = 0; i < 51; i++) {
+    //     let img = titlePoint1.get((i*471),0, 471, 500);
+    //     gameState.titlePoint1.push(img);
+    // }
+    //
+    // for (var i = 0; i < 49; i++) {
+    //     let img = titlePoint2.get((i*471),0, 471, 500);
+    //     gameState.titlePoint2.push(img);
+    // }
+    //
+    // for (var i = 0; i < 38; i++) {
+    //     let img = titlePoint3.get((i*471),0, 471, 500);
+    //     gameState.titlePoint3.push(img);
+    // }
+    //
+    // for (var i = 0; i < 41; i++) {
+    //     let img = titlePoint4.get((i*471),0, 471, 500);
+    //     gameState.titlePoint4.push(img);
+    // }
     redrawn(gameState);
 }
 // redraws the views based on the current dimensions
@@ -38,7 +120,9 @@ function setup() {
 function redrawn(gameState){
     views = [];
     let menuScreen = new MenuView()
+    menuScreen.redrawElements(gameState);
     views.push(menuScreen)
+
     let playScreen = new PlayView()
     views.push(playScreen)
 }
