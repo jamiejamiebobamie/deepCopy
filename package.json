@@ -1,24 +1,25 @@
 {
-  "name": "tictactoe_frontend",
+  "name": "binarygame",
   "version": "1.0.0",
-  "description": "frontend experience for my tic tac toe ai",
+  "description": "This is a Javascript game that teaches the player how to read binary.",
   "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.3",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jamiejamiebobamie/-tictactoe_frontend.git"
+    "url": "git+https://github.com/jamiejamiebobamie/deepCopy.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jamiejamiebobamie/-tictactoe_frontend/issues"
+    "url": "https://github.com/jamiejamiebobamie/deepCopy/issues"
   },
-  "homepage": "https://github.com/jamiejamiebobamie/-tictactoe_frontend#readme",
-  "dependencies": {
-    "express": "^4.17.1",
-    "express-handlebars": "^4.0.3",
-    "path": "^0.12.7"
-  }
+  "homepage": "https://github.com/jamiejamiebobamie/deepCopy#readme"
 }
