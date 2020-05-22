@@ -40,13 +40,13 @@ let titlePoint4 = [];
 
 // p5.js built-in method
 function preload(){
-    idle = loadImage('../sprites/idle150.png')
-    wave = loadImage('../sprites/wave150.png')
-    chosen = loadImage('../sprites/chosen150.png')
-    font = loadFont('../fonts/VeraMono.ttf');
-    titleIdle = loadImage('../sprites/SpriteSheet_title-idle-58-471x500.png')
-    titleWave = loadImage('../sprites/SpriteSheet_title-wave-18-471x500.png')
-    titleChosen = loadImage('../sprites/SpriteSheet_title-chosen-87-471x500.png')
+    // idle = loadImage('../sprites/idle150.png')
+    // wave = loadImage('../sprites/wave150.png')
+    // chosen = loadImage('../sprites/chosen150.png')
+    // font = loadFont('../fonts/VeraMono.ttf');
+    titleIdle = loadImage('../sprites_minimized/SpriteSheet_title-idle-58-159.7x167.png')
+    titleWave = loadImage('../sprites_minimized/SpriteSheet_title-wave-18-156.833333333x166.png')
+    titleChosen = loadImage('../sprites_minimized/SpriteSheet_title-chosen-87-157x167.png')
     // titlePoint1 = loadImage('../sprites/SpriteSheet_title-point1-51-471x500.png')
     // titlePoint2 = loadImage('../sprites/SpriteSheet_title-point2-49-471x500.png')
     // titlePoint3 = loadImage('../sprites/SpriteSheet_title-point3-38-471x500.png')
@@ -80,17 +80,17 @@ function setup() {
     // }
 
     for (var i = 0; i < 58; i++) {
-        let img = titleIdle.get((i*471),0, 471, 500);
+        let img = titleIdle.get((i*157),0, 157, 167);
         gameState.titleIdle.push(img);
     }
-
     for (var i = 0; i < 18; i++) {
-        let img = titleWave.get((i*471),0, 471, 500);
+        let img = titleWave.get((i*156.8333),0, 156.8333, 166);
         gameState.titleWave.push(img);
     }
+    // titleChosen = loadImage('../sprites_minimized/SpriteSheet_title-chosen-87-157x167.png')
 
     for (var i = 0; i < 87; i++) {
-        let img = titleChosen.get((i*471),0, 471, 500);
+        let img = titleChosen.get((i*157),0, 157, 167);
         gameState.titleChosen.push(img);
     }
     //

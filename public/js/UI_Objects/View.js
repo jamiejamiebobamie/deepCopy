@@ -102,10 +102,10 @@ class MenuView extends View{
             // 4: [random(this.spriteAreaStartX + this.spriteAreaStartX*1100/1500, this.spriteAreaStartX + this.spriteAreaStartX*1300/1500), random(this.height + this.height*540/700, + this.height*620/700)],
             // 5: [random(this.spriteAreaStartX + this.spriteAreaStartX*1300/1500, this.spriteAreaStartX + this.spriteAreaStartX*1500/1500), random(this.height + this.height*620/700, this.height + this.height*700/700)]
         }
-        let grid = this.makeVertices(1)
+        let grid = this.makeVertices(5)
         let titleSprites = []
         // console.log(gameState.titleIdle, gameState.titleWave, gameState.titleChosen, gameState.titlePoint1, gameState.titlePoint2, gameState.titlePoint3, gameState.titlePoint4)
-        for (var i = 0; i < q; i++){
+        for (var i = 0; i < 5; i++){
             let x = range[grid[i][0]][0]*2;
             let y = range[grid[i][1]][1]-100;
             titleSprites[i] = new TitleSprite(gameState.titleIdle, gameState.titleWave, gameState.titleChosen, gameState.titlePoint1, gameState.titlePoint2, gameState.titlePoint3, gameState.titlePoint4, x, y, random(.5, .7))
