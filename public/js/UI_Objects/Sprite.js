@@ -31,7 +31,7 @@ class TitleSprite {
         this.len_chosen = this.animation_chosen.length
         this.x = x;
         this.y = y;
-        this.scale = this.y/700
+        this.scale = 1//this.y/700
         this.idle = true;
         this.wave = false;
         this.chosen = false;
@@ -39,8 +39,8 @@ class TitleSprite {
         this.freeze = 0;
         this.speedStored = this.speed;
         this.green = 255
-        this.MouseOverX = this.x*this.scale+(193*this.scale);
-        this.MouseOverY = this.y*this.scale+(250*this.scale);
+        this.MouseOverX = this.x//*this.scale+(193*this.scale);
+        this.MouseOverY = this.y//*this.scale+(250*this.scale);
         this.MouseOverArea = 100*this.scale;
     }
 
