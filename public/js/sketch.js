@@ -27,7 +27,30 @@ let gameState = {idle:[],
                 brainTop:null,
                 brainMiddle:null,
                 brainBottom:null,
+                lives:3,
+                level:1,
+                totalLevels:8,
                 }
+
+
+    let win_jsS = 0;
+    // var count = 9;
+    // win_jsS = winner(count);
+    let living;
+    let current;
+    let ll; // linkedList
+    let alive;
+    let begin; //occurs when you've clicked on a hologram
+    let end;
+    let interv1;
+    let myVar2;
+    let guess;
+    let centerX = 500;
+    let centerY = 530;
+    var start = false; //occurs when you've clicked on the button for the first time. intend to phase-out.
+    let holograms;
+    var rM = 100; //radius modifier
+    var totalPoints = 41
 
 let anim_idle = [];
 let anim_wave = [];
@@ -41,11 +64,48 @@ let titlePoint2 = [];
 let titlePoint3 = [];
 let titlePoint4 = [];
 
+// OLD
+// function winner(num){
+//     // Calculating the 'winner' of the Josephus Problem.
+//     // Returns the number of people playing, the winner, the winner's number in binary.
+//     // The number of people playing gets progressively larger.
+//     let range = {
+//         9: [3],
+//         8: [4,5,6,7,9],
+//         7: [10,11,12,13,14],
+//         6: [15,16,17,18,19],
+//         5: [20,21,22,23,24],
+//         4: [25,26,27,28,29],
+//         3: [30,31,32,33,34],
+//         2: [35,36,37,38,39,40],
+//         1: [41]
+//     }
+//     let n = range[num][Math.floor(Math.random() * range[num].length)];
+//     let b = convertToBinary(n);
+//     let p = findHighestPow(b);
+//     let winner = ((2*(n - p))+1);
+//     return ([n, winner, truncateBinary(convertToBinary(winner))]);
+// }
+//
+// function computeWinner(level){
+//     let range = {
+//         8: [4,5,6,7,9],
+//         7: [10,11,12,13,14],
+//         6: [15,16,17,18,19],
+//         5: [20,21,22,23,24],
+//         4: [25,26,27,28,29],
+//         3: [30,31,32,33,34],
+//         2: [35,36,37,38,39,40],
+//         1:
+//     }
+//
+// }
+
 // p5.js built-in method
 function preload(){
-    // idle = loadImage('../sprites/idle150.png')
-    // wave = loadImage('../sprites/wave150.png')
-    // chosen = loadImage('../sprites/chosen150.png')
+    idle = loadImage('../sprites/idle150.png')
+    wave = loadImage('../sprites/wave150.png')
+    chosen = loadImage('../sprites/chosen150.png')
     // font = loadFont('../fonts/VeraMono.ttf');
     titleIdle = loadImage('../sprites_minimized/SpriteSheet_title-idle-58-159.7x167.png')
     titleWave = loadImage('../sprites_minimized/SpriteSheet_title-wave-18-156.833333333x166.png')
@@ -72,20 +132,20 @@ function setup() {
     // p5.js built-in method. centers the canvas and all drawn objects.
     imageMode(CENTER);
 
-    // for (var i = 0; i < 185; i++) {
-    //     let img = idle.get((i*150),0, 150, 119);
-    //     gameState.idle.push(img);
-    // }
-    //
-    // for (var i = 0; i < 20; i++) {
-    //     let img = wave.get((i*150),0, 150, 119);
-    //     gameState.wave.push(img);
-    // }
-    //
-    // for (var i = 0; i < 67; i++) {
-    //     let img = chosen.get((i*150),0, 150, 119);
-    //     gameState.chosen.push(img);
-    // }
+    for (var i = 0; i < 185; i++) {
+        let img = idle.get((i*150),0, 150, 119);
+        gameState.idle.push(img);
+    }
+
+    for (var i = 0; i < 20; i++) {
+        let img = wave.get((i*150),0, 150, 119);
+        gameState.wave.push(img);
+    }
+
+    for (var i = 0; i < 67; i++) {
+        let img = chosen.get((i*150),0, 150, 119);
+        gameState.chosen.push(img);
+    }
 
     for (var i = 0; i < 58; i++) {
         let img = titleIdle.get((i*157),0, 157, 167);
@@ -122,6 +182,10 @@ function setup() {
     //     gameState.titlePoint4.push(img);
     // }
     redrawn(gameState);
+    myVar2 = undefined;
+    end = false;
+    begin = false;
+    // refreshGame();
 }
 // redraws the views based on the current dimensions
     // of the screen (width and height) and the current gameState.

@@ -143,6 +143,7 @@ class MenuView extends View{
 class PlayView extends View{
     constructor(parameterObject){
         super(parameterObject)
+        this.holograms;
     }
     redrawElements(gameState){
         let portrait = windowWidth < windowHeight;
@@ -220,11 +221,11 @@ class PlayView extends View{
         let healthBarFirstThird = new ImageContainer(params);
         this.uiElements.push(healthBarFirstThird)
 
-        // params = {len:3, index:1, parent:healthBarContainer}
+        params = {parent:healthBarContainer}
         let healthBarSecondThird = new ImageContainer(params);
         this.uiElements.push(healthBarSecondThird)
         //
-        // params = {len:3, index:2, parent:healthBarContainer}
+        params = {parent:healthBarContainer}
         let healthBarThirdThird = new ImageContainer(params);
         this.uiElements.push(healthBarThirdThird)
         if (gameState){
@@ -244,9 +245,115 @@ class PlayView extends View{
             }
 
             healthBarFirstThird.setImageProps(gameState.brainTop,imageWidth,imageHeight)
+            healthBarFirstThird.setImageOffsets(0,-1)
             healthBarSecondThird.setImageProps(gameState.brainMiddle,imageWidth,imageHeight)
             healthBarThirdThird.setImageProps(gameState.brainBottom,imageWidth,imageHeight)
+            healthBarThirdThird.setImageOffsets(0,1)
+
+            this.holograms = this.refreshGame(gameState);
+            this.interv1 = setInterval(this.josephus, 800);
+        }
+
+    }
+
+    jumpToMenuView(){return ["toggleMenuView"]}
+
+    drawPoint(r, currentPoint, totalPoints) {
+        var theta = ((Math.PI*2) / totalPoints);
+        var angle = (theta * currentPoint+1);
+        var x = (r * Math.cos(angle));
+        var y = (r * Math.sin(angle));
+        return [x, y];
+    }
+
+    // let gameState = {idle:[],
+    //                 wave:[],
+    //                 chosen:[],
+    //                 font:[],
+    //                 titleIdle:[],
+    //                 titleWave:[],
+    //                 titleChosen:[],
+    //                 titlePoint1:[],
+    //                 titlePoint2:[],
+    //                 titlePoint3:[],
+    //                 titlePoint4:[],
+    //                 brainTop:null,
+    //                 brainMiddle:null,
+    //                 brainBottom:null,
+    //                 lives:3,
+    //                 level:1,
+    //                 totalLevels:8,
+    //                 }
+
+    refreshGame(gameState){
+        holograms = [];
+        myVar2 = undefined;
+        end = false;
+        begin = false;
+        totalPoints = 8;
+        start = true;
+        if (start == true){
+            for (var i = 0; i < totalPoints; i++) {
+                var radius = totalPoints*50
+                var x = this.drawPoint(radius, i, totalPoints)[0]+centerX
+                var y = this.drawPoint(radius, i, totalPoints)[1]+centerY
+                holograms[i] = new HologramSprite(gameState.idle, gameState.wave, gameState.chosen, x, y, radians(0), random(.1, .8), i)
+            }
+        }
+        ll = new LinkedList();
+        alive = win_jsS[0]
+        living = []
+        for (let i = 1; i <= alive; i++){
+            ll.addNode(i)
+            living.push(i)
+        }
+        current = ll.head;
+        return holograms
+    }
+
+    josephus(){
+        if(1 < ll.len && begin == true){
+        myVar2 = living[current.next.value-1]
+            if (holograms[myVar2-1].out == true){
+                living[current.next.value-1] = living[current.next.value-1]+"x"
+                ll.removeNode(current, current.next)
+                current = current.next
+                }
+        } else if (1 == ll.len) {
+        end = true;
+    }}
+
+    draw(){
+        let win_jsS = ["9","5","4"]
+        let guess = 5
+        super.draw();
+        // fill('#39FF14');
+        if (begin == true){
+            text('guess:  ' + guess, 50 , 245)
+        }
+        if ( end == true){
+            if (win_jsS[1] == guess) {
+                textSize(35);
+                text('You\'re right!',1100, 400)
+                text('The number ' + win_jsS[1] + ' is ' + win_jsS[2] + ' in binary.',1100, 475)
+            }
+        }
+        if (this.holograms.length){
+            console.log("hey")
+            for (let hologram of this.holograms) {
+            hologram.show();
+            hologram.animate();
+        //     if (hologram.begin && begin == false) {
+        //         guess = hologram.n
+        //         begin = true;
+        //     }
+        //     if (myVar2 != undefined){
+        //     holograms[myVar2-1].out = true;
+        // }
+        //     if (end == true){
+        //         holograms[win_jsS[1]-1].winner = true;
+        //     }
         }
     }
-    jumpToMenuView(){return ["toggleMenuView"]}
+}
 }

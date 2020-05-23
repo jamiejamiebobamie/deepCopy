@@ -377,4 +377,8 @@ if(this.out == false){
         }
 }
 
+draw(){
+    this.animate();
+}
+
 }
