@@ -32,7 +32,6 @@ let gameState = {idle:[],
                 totalLevels:8,
                 }
 
-
     let win_jsS = 0;
     // var count = 9;
     // win_jsS = winner(count);
@@ -103,9 +102,9 @@ let titlePoint4 = [];
 
 // p5.js built-in method
 function preload(){
-    idle = loadImage('../sprites/idle150.png')
-    wave = loadImage('../sprites/wave150.png')
-    chosen = loadImage('../sprites/chosen150.png')
+    // idle = loadImage('../sprites_minimized/Spritesheet_game-idle-150-60x39.png')
+    // wave = loadImage('../sprites_minimized/Spritesheet_game-wave-150-6.48666666667x39.png')
+    // chosen = loadImage('../sprites_minimized/Spritesheet_game-chosen-150-22x39.png')
     // font = loadFont('../fonts/VeraMono.ttf');
     titleIdle = loadImage('../sprites_minimized/SpriteSheet_title-idle-58-159.7x167.png')
     titleWave = loadImage('../sprites_minimized/SpriteSheet_title-wave-18-156.833333333x166.png')
@@ -115,10 +114,6 @@ function preload(){
     gameState.brainMiddle = loadImage('../imgs/healthBar/brainMiddle.png');
     gameState.brainBottom = loadImage('../imgs/healthBar/brainBottom.png');
 
-    // titlePoint1 = loadImage('../sprites/SpriteSheet_title-point1-51-471x500.png')
-    // titlePoint2 = loadImage('../sprites/SpriteSheet_title-point2-49-471x500.png')
-    // titlePoint3 = loadImage('../sprites/SpriteSheet_title-point3-38-471x500.png')
-    // titlePoint4 = loadImage('../sprites/SpriteSheet_title-point4-41-471x500.png')
 }
 // p5.js built-in method
 function setup() {
@@ -132,18 +127,22 @@ function setup() {
     // p5.js built-in method. centers the canvas and all drawn objects.
     imageMode(CENTER);
 
+
+    wave = loadImage('../sprites_minimized/Spritesheet_game-wave-150-6.48666666667x39.png')
+    chosen = loadImage('../sprites_minimized/Spritesheet_game-chosen-150-22x39.png')
+
     for (var i = 0; i < 185; i++) {
-        let img = idle.get((i*150),0, 150, 119);
+        let img = titleIdle.get((i*150),0, 60, 39);
         gameState.idle.push(img);
     }
 
     for (var i = 0; i < 20; i++) {
-        let img = wave.get((i*150),0, 150, 119);
+        let img = titleWave.get((i*150),0, 150, 39);
         gameState.wave.push(img);
     }
 
     for (var i = 0; i < 67; i++) {
-        let img = chosen.get((i*150),0, 150, 119);
+        let img = titleChosen.get((i*150),0, 150, 119);
         gameState.chosen.push(img);
     }
 
@@ -155,37 +154,16 @@ function setup() {
         let img = titleWave.get((i*156.8333),0, 156.8333, 166);
         gameState.titleWave.push(img);
     }
-    // titleChosen = loadImage('../sprites_minimized/SpriteSheet_title-chosen-87-157x167.png')
 
     for (var i = 0; i < 87; i++) {
         let img = titleChosen.get((i*157),0, 157, 167);
         gameState.titleChosen.push(img);
     }
-    //
-    // for (var i = 0; i < 51; i++) {
-    //     let img = titlePoint1.get((i*471),0, 471, 500);
-    //     gameState.titlePoint1.push(img);
-    // }
-    //
-    // for (var i = 0; i < 49; i++) {
-    //     let img = titlePoint2.get((i*471),0, 471, 500);
-    //     gameState.titlePoint2.push(img);
-    // }
-    //
-    // for (var i = 0; i < 38; i++) {
-    //     let img = titlePoint3.get((i*471),0, 471, 500);
-    //     gameState.titlePoint3.push(img);
-    // }
-    //
-    // for (var i = 0; i < 41; i++) {
-    //     let img = titlePoint4.get((i*471),0, 471, 500);
-    //     gameState.titlePoint4.push(img);
-    // }
+
     redrawn(gameState);
     myVar2 = undefined;
     end = false;
     begin = false;
-    // refreshGame();
 }
 // redraws the views based on the current dimensions
     // of the screen (width and height) and the current gameState.

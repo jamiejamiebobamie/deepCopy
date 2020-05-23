@@ -266,25 +266,6 @@ class PlayView extends View{
         return [x, y];
     }
 
-    // let gameState = {idle:[],
-    //                 wave:[],
-    //                 chosen:[],
-    //                 font:[],
-    //                 titleIdle:[],
-    //                 titleWave:[],
-    //                 titleChosen:[],
-    //                 titlePoint1:[],
-    //                 titlePoint2:[],
-    //                 titlePoint3:[],
-    //                 titlePoint4:[],
-    //                 brainTop:null,
-    //                 brainMiddle:null,
-    //                 brainBottom:null,
-    //                 lives:3,
-    //                 level:1,
-    //                 totalLevels:8,
-    //                 }
-
     refreshGame(gameState){
         holograms = [];
         myVar2 = undefined;
